@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :ratings
   resources :products
   resources :ecommerce_websites
-  resources :search_histories
-  resources :users
+  resources :search_histories 
+  resources :users 
 
   post "/login", to:"auth#login"
   delete "/logout", to: "auth#logout"

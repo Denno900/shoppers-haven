@@ -9,6 +9,8 @@ import { Link } from "react-router-dom"
 export default function SignUp() {
   const [formData, setFormData] = useState({})
   const { signup } = useContext(AuthContext)
+  let uploadedImage = "";
+  
 
   function handleChange(e) {
     setFormData({
@@ -20,6 +22,21 @@ export default function SignUp() {
   function handleSubmit(e) {
     e.preventDefault()
     signup(formData)
+  }
+
+  const addImage = (e) => {
+      const reader = new FileReader();
+      const file = e.target.files[0]
+      let pictureDiv = document.getElementById("picture")
+
+      reader.onload = () => {
+        uploadedImage = reader.result
+        pictureDiv.style.backgroundImage = `url(${uploadedImage})`
+      }
+      if(file){
+        reader.readAsDataURL(file)
+      }
+
   }
 
   return (
@@ -116,6 +133,22 @@ export default function SignUp() {
                           className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                         />
                       </div>
+                    </div>
+                    <div className="space-y-1">
+                      <label htmlFor="profile" className="block text-sm font-medium text-gray-700">
+                        Choose your Profile Picture
+                      </label>
+                      <div className="mt-1 flex flex-row-reverse justify-between items-center">
+                        <input
+                          id="picture-input"
+                          name="picture"
+                          type="file"
+                          accept="image/jpeg, image/jpg, image/png"
+                          onChange={addImage}
+                          className="block w-7/12 appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        />
+                      <div id="picture" className="m-1 p-0 w-20 bg-cover border-solid border-black border-2 aspect-square rounded-full"></div>
+                      </div> 
                     </div>
                     <div>
                       <button

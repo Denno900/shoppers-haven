@@ -1,13 +1,20 @@
 class ProductsController < ApplicationController
-  
-  skip_before_action :authorized,  only: %i[ index show ]
-  
-  # GET /products
-  def index
-    @products = Product.all
+  # before_action :set_product, only: %i[ show update destroy index ]
+  skip_before_action :authorized, only: [:index]
 
-    render json: @products
+
+  # GET /products
+def index
+  if params[:search].present?
+    @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+  else
+    @products = Product.all
   end
+      
+  render json: @products
+end
+
+  
 
   # GET /products/1
   def show

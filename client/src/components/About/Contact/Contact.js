@@ -106,7 +106,7 @@ const footerNavigation = {
 
 export default function Contact() {
   return (
-    <div className="bg-white">
+    <div className="bg-white mb-5">
       <main className="overflow-hidden">
         {/* Header */}
         <div className="bg-warm-gray-50">
@@ -157,7 +157,7 @@ export default function Contact() {
                 Contact us
               </h2>
 
-              <div className="grid grid-cols-1 lg:grid-cols-3">
+              <div className="grid grid-cols-1 lg:grid-cols-3 shadow rounded-md">
                 {/* Contact information */}
                 <div className="relative overflow-hidden bg-gradient-to-b from-teal-500 to-teal-600 py-10 px-6 sm:px-10 xl:p-12">
                   {/* Decorative angle backgrounds */}

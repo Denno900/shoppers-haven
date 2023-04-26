@@ -14,15 +14,16 @@ class SearchHistoriesController < ApplicationController
   end
 
   # POST /search_histories
-  def create
-    @search_history = SearchHistory.new(search_history_params)
+ def create
+  @search_history = SearchHistory.new(search_history_params)
 
-    if @search_history.save
-      render json: @search_history, status: :created, location: @search_history
-    else
-      render json: @search_history.errors, status: :unprocessable_entity
-    end
+  if @search_history.save
+    render json: @search_history, status: :created, location: @search_history
+  else
+    render json: @search_history.errors, status: :unprocessable_entity
   end
+end
+  
 
   # PATCH/PUT /search_histories/1
   def update
@@ -45,7 +46,7 @@ class SearchHistoriesController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def search_history_params
-      params.require(:search_history).permit(:query, :user_id)
-    end
+   def search_history_params
+  params.require(:search_history).permit(:query, :user_id)
+end
 end
