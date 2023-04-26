@@ -84,3 +84,4 @@ production:
   database: shoppers_haven_production
   username: shoppers_haven
   password: <%= ENV["SHOPPERS_HAVEN_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
