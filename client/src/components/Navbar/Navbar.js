@@ -74,10 +74,10 @@ export default function Navbar() {
                             <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 {navigation.map((item) => (
-                                <a
+                                <button
                                     key={item.name}
                                     style = {{textDecoration: "none"  }}
-                                    href={item.href}
+                                    onClick={() => navigate(`${item.href}`)}
                                     className={classNames(
                                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                     'rounded-md px-3 py-2 text-sm font-medium'
@@ -85,7 +85,7 @@ export default function Navbar() {
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     {item.name}
-                                </a>
+                                </button>
                                 ))}
                             </div>
                             </div>
@@ -127,9 +127,9 @@ export default function Navbar() {
                                 </div>
                                  ) :
                                 (<Disclosure.Button
-                                    as="a"
+                                    as="button"
                                     style = {{textDecoration: "none"}}
-                                    href='/login'
+                                    onClick={() => navigate('/login')}
                                     className={classNames(
                                         current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                         'block rounded-md px-3 py-2 text-base font-medium'
