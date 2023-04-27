@@ -6,7 +6,7 @@ class ProductsController < ApplicationController
   # GET /products
 def index
   if params[:search].present?
-    @products = Product.where("name LIKE ?", "%#{params[:search]}%")
+    @products = Product.where("name ILIKE ?", "%#{params[:search]}%")
   else
     @products = Product.all
   end

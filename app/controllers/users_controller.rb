@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
   def me
-    render json: {user: @user}
+    render json: {user: @user, logged_in: true}
   end
 
  def signup
