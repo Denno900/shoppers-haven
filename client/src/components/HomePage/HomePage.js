@@ -13,17 +13,17 @@ function Home() {
   
 
   function handleSearch() {
-    fetch('/search_histories', {
-      'method': 'POST',
-      'headers': {
-        'contentType': 'application/json',
-        'accept': 'application/json'
-      },
-      'body': JSON.stringify({
-        query: query,
-        user_id: user.id
-      })
-    })
+    // fetch('/search_histories', {
+    //   'method': 'POST',
+    //   'headers': {
+    //     'contentType': 'application/json',
+    //     'accept': 'application/json'
+    //   },
+    //   'body': JSON.stringify({
+    //     query: query,
+    //     user_id: user.id
+    //   })
+    // })
     navigate('/search')
   }
 

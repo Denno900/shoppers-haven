@@ -6,6 +6,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import DotLoader from "react-spinners/DotLoader";
 import './search.css'
 import Paginate from './Paginate'
+import { query } from '../HomePage/HomePage'
 
 // const products = [
 //   {
@@ -72,7 +73,7 @@ function SearchPage() {
   }, [])
 
   useEffect(() => {
-    fetch('/products')
+    fetch(`/products?search=${query}`)
     .then(r => r.json())
     .then((data) => setProducts(data))
   }, [])
@@ -111,6 +112,7 @@ function SearchPage() {
                 className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-lg placeholder-gray-500 focus:border-green-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm"
                 placeholder="Search"
                 type="search"
+                onChange={(e) => query = e.target.value}
                 />
             </div>
             <div>
