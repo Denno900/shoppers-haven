@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import './homepage.css'
 import { MagnifyingGlassIcon } from '@heroicons/react/20/solid'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../../context/AuthContext'
+
+export let query = ""
 
 
 function Home() {
   const navigate = useNavigate()
+  const {user} = useContext(AuthContext)
+  
 
   function handleSearch() {
+    fetch('/search_histories', {
+      'method': 'POST',
+      'headers': {
+        'contentType': 'application/json',
+        'accept': 'application/json'
+      },
+      'body': JSON.stringify({
+        query: query,
+        user_id: user.id
+      })
+    })
     navigate('/search')
   }
 
@@ -29,6 +45,7 @@ function Home() {
               className="block w-full rounded-md border border-gray-300 bg-white py-2 pl-10 pr-3 text-lg placeholder-gray-500 focus:border-green-500 focus:text-gray-900 focus:placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-green-500 sm:text-sm"
               placeholder="Search"
               type="search"
+              onChange={(e) => query = e.target.value}
             />
           </div>
           <div>
