@@ -44,7 +44,7 @@ function AuthProvider({children}){
                   })
                   setUser(data.user)
                   setLoggedIn(data.logged_in)
-                  console.log(data.logged_in)
+                  console.log(data.user)
                   navigate('/')
             }else {
                 Swal.fire({
@@ -109,7 +109,6 @@ function AuthProvider({children}){
         .then(response=>{
             setUser(response.user)
             setLoggedIn(response.logged_in)
-            console.log(response.user)
         }
         )
     }, [token])
@@ -140,7 +139,8 @@ function AuthProvider({children}){
         signup,
         loggedIn,
         handleSignOut,
-        user
+        user, 
+        token
       }
 
     return (

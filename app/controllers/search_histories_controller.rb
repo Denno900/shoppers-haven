@@ -3,7 +3,7 @@ class SearchHistoriesController < ApplicationController
 
   # GET /search_histories
   def index
-    @search_histories = SearchHistory.all
+    @search_histories = current_user.search_histories.all
 
     render json: @search_histories
   end
@@ -14,15 +14,17 @@ class SearchHistoriesController < ApplicationController
   end
 
   # POST /search_histories
- def create
-  @search_history = SearchHistory.new(search_history_params)
-
+#  def create
+  
+def create
+  @search_history = current_user.search_histories.new(search_history_params)
   if @search_history.save
-    render json: @search_history, status: :created, location: @search_history
+    render json: @search_history , status: :created
   else
     render json: @search_history.errors, status: :unprocessable_entity
   end
 end
+# end
   
 
   # PATCH/PUT /search_histories/1
@@ -47,6 +49,6 @@ end
 
     # Only allow a list of trusted parameters through.
    def search_history_params
-  params.require(:search_history).permit(:query, :user_id)
+  params.permit(:query, :user_id)
 end
 end

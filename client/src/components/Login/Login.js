@@ -37,7 +37,7 @@ export default function Login() {
             </div>
             <div className="mt-8">
               <div>
-                <div>
+                {/* <div>
                   <p className="text-sm font-medium text-gray-700">Sign in with</p>
                   <div className="mt-1 grid grid-cols-3 gap-3">
                     <div>
@@ -82,15 +82,15 @@ export default function Login() {
                       </a>
                     </div>
                   </div>
-                </div>
-                <div className="relative mt-6">
+                </div> */}
+                {/* <div className="relative mt-6">
                   <div className="absolute inset-0 flex items-center" aria-hidden="true">
                     <div className="w-full border-t border-gray-300" />
                   </div>
                   <div className="relative flex justify-center text-sm">
                     <span className="bg-white px-2 text-gray-500">Or continue with</span>
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="mt-6">
                 <form  className="space-y-6" onSubmit={(e) => handleSubmit(e)}>

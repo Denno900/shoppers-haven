@@ -4,41 +4,24 @@ import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
-import Swal from 'sweetalert2'
 import { AuthContext } from '../../context/AuthContext'
 
 export default function Navbar() {
     const [current] = useState(false)
-    const {setLoggedIn, loggedIn} = useContext(AuthContext)
+
+    const { handleSignOut, loggedIn, user} = useContext(AuthContext)
+    
     const navigate = useNavigate()
    
     const navigation = [
-    { name: 'Home', href: '/', current: true }, 
-    { name: 'About', href: '/about', current: false },
+        { name: 'Home', href: '/', current: true }, 
+        { name: 'About', href: '/about', current: false },
     ]
 
     function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
     }
 
-    function handleSignOut(e) {
-        fetch("/logout",{
-            method: "DELETE"
-        })
-        .then(response=>{
-            // localStorage.setItem("jwt", null)
-            localStorage.removeItem("jwt")
-            setLoggedIn(false)
-            Swal.fire({
-                position: 'center',
-                icon: 'success',
-                title: 'LoggedOut successfully!',
-                showConfirmButton: false,
-                timer: 3000
-              })
-              navigate("/login")
-        })
-    }
 
   return (
     <div>
@@ -74,10 +57,10 @@ export default function Navbar() {
                             <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 {navigation.map((item) => (
-                                <button
+                                <a
                                     key={item.name}
                                     style = {{textDecoration: "none"  }}
-                                    onClick={() => navigate(`${item.href}`)}
+                                    href={item.href}
                                     className={classNames(
                                     item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                     'rounded-md px-3 py-2 text-sm font-medium'
@@ -85,7 +68,7 @@ export default function Navbar() {
                                     aria-current={item.current ? 'page' : undefined}
                                 >
                                     {item.name}
-                                </button>
+                                </a>
                                 ))}
                             </div>
                             </div>
@@ -94,11 +77,11 @@ export default function Navbar() {
                             <Menu as="div" className="relative ml-3">
                             { loggedIn ?
                                 (<div>
-                                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                                    <Menu.Button className="flex rounded-full bg-cover bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                     <span className="sr-only">Open user menu</span>
                                     <img
-                                        className="h-8 w-8 rounded-full"
-                                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                        className="h-16 w-16 rounded-full bg-cover"
+                                        src={user.image_url}
                                         alt=""
                                     />
                                     </Menu.Button>
@@ -122,14 +105,24 @@ export default function Navbar() {
                                     </button>
                                     )}
                                 </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
+                                    <button
+                                        className={`${classNames(active ? 'bg-gray-100 w-full' : '', 'block px-4 py-2 text-sm text-gray-700')} no-underline`}
+                                        onClick={(e) => handleSignOut(e)}
+                                    >
+                                        Search history
+                                    </button>
+                                    )}
+                                </Menu.Item>
                                 </Menu.Items>
                                     </Transition>
                                 </div>
                                  ) :
                                 (<Disclosure.Button
-                                    as="button"
+                                    as="a"
                                     style = {{textDecoration: "none"}}
-                                    onClick={() => navigate('/login')}
+                                    href='/login'
                                     className={classNames(
                                         current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                         'block rounded-md px-3 py-2 text-base font-medium'
