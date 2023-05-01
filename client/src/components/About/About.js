@@ -22,16 +22,16 @@ export default function About() {
             <div className="mx-auto max-w-4xl">
               <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
                 <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
-                  <dt className="order-2 mt-2 text-lg font-medium leading-6">Refund guarantee</dt>
-                  <dd className="order-1 text-5xl font-bold tracking-tight about-div">100%</dd>
+                  <dt className="order-2 mt-2 text-lg font-medium leading-6">Users</dt>
+                  <dd className="order-1 text-5xl font-bold tracking-tight about-div">10K+</dd>
                 </div>
                 <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
-                  <dt className="order-2 mt-2 text-lg font-medium leading-6">Delivery</dt>
-                  <dd className="order-1 text-5xl font-bold tracking-tight about-div">24/7</dd>
+                  <dt className="order-2 mt-2 text-lg font-medium leading-6">Product Variety</dt>
+                  <dd className="order-1 text-5xl font-bold tracking-tight about-div">100+</dd>
                 </div>
                 <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
-                  <dt className="order-2 mt-2 text-lg font-medium leading-6">Purchases</dt>
-                  <dd className="order-1 text-5xl font-bold tracking-tight about-div">100k</dd>
+                  <dt className="order-2 mt-2 text-lg font-medium leading-6">Convience</dt>
+                  <dd className="order-1 text-5xl font-bold tracking-tight about-div">100%</dd>
                 </div>
               </dl>
             </div>

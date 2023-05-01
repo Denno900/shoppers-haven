@@ -1,8 +1,11 @@
+import { useContext } from 'react'
+import { AuthContext } from '../../context/AuthContext'
+
 const navigation = {
   social: [
     {
       name: 'Facebook',
-      href: '#',
+      href: 'https://www.facebook.com/',
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -52,6 +55,7 @@ const navigation = {
 }
 
 export default function Footer() {
+  const { loggedIn } = useContext(AuthContext)
   return (
     <footer className="bg-gray-900" aria-labelledby="footer-heading">
       <h2 id="footer-heading" className="sr-only">
@@ -67,9 +71,14 @@ export default function Footer() {
               <div className="md:mt-0">
                 <a href="/about" className="text-sm font-semibold leading-6 text-white no-underline">About</a>
               </div>
-              <div>
-                <a href="signup" className="text-sm font-semibold leading-6 text-white no-underline">Get Started</a>
-              </div>
+              {
+                loggedIn ? null :
+                (
+                  <div>
+                    <a href="signup" className="text-sm font-semibold leading-6 text-white no-underline">Get Started</a>
+                  </div>
+                )
+              }
             </div>
           </div>
         </div>

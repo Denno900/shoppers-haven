@@ -9,7 +9,7 @@ export let query = ""
 
 function Home() {
   const navigate = useNavigate()
-  const {user, token} = useContext(AuthContext)
+  const {token} = useContext(AuthContext)
   const [searchQuery, setSearchQuery] = useState("")
   
 
@@ -25,8 +25,6 @@ function Home() {
         query: searchQuery
       })
     })
-    .then(r => r.json())
-    .then(data => console.log(data))
     navigate('/search')
   }
 

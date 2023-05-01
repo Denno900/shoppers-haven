@@ -5,21 +5,51 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
+import DotLoader from "react-spinners/DotLoader";
+import Modal from 'react-bootstrap/Modal';
 
 export default function Navbar() {
     const [current] = useState(false)
+    const [fullscreen, setFullscreen] = useState(true);
+    const [show, setShow] = useState(false);
+    const [searches, setSearches] = useState([]);
+    const [loading, setLoading] = useState(false)
 
-    const { handleSignOut, loggedIn, user} = useContext(AuthContext)
+    
+    const { handleSignOut, loggedIn, user, token} = useContext(AuthContext)
     
     const navigate = useNavigate()
    
     const navigation = [
-        { name: 'Home', href: '/', current: true }, 
+        { name: 'Home', href: '/', current: false }, 
         { name: 'About', href: '/about', current: false },
     ]
 
     function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
+    }
+
+    function handleShow(breakpoint) {
+        setFullscreen(breakpoint);
+        setShow(true);
+    }
+
+    function fetchSearches() {
+        setLoading(true)
+        fetch('search_histories',{
+            method: 'GET',
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+         .then(r => r.json())
+         .then(data => {
+            setTimeout(() => {
+                setLoading(false)
+              }, 2500)
+            setSearches(data)
+        })
+         
     }
 
 
@@ -97,9 +127,18 @@ export default function Navbar() {
                                 <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                                 <Menu.Item>
                                     {({ active }) => (
+                                    <h1
+                                        className={`${classNames(active ? 'bg-gray-100 w-full' : '', 'block px-4 py-2 text-xl text-gray-700')}`}
+                                    >
+                                        {user.first_name}
+                                    </h1>
+                                    )}
+                                </Menu.Item>
+                                <Menu.Item>
+                                    {({ active }) => (
                                     <button
                                         className={`${classNames(active ? 'bg-gray-100 w-full' : '', 'block px-4 py-2 text-sm text-gray-700')} no-underline`}
-                                        onClick={(e) => handleSignOut(e)}
+                                        onClick={(e) => {handleSignOut(e); navigate('/login')}}
                                     >
                                         Sign out
                                     </button>
@@ -109,7 +148,7 @@ export default function Navbar() {
                                     {({ active }) => (
                                     <button
                                         className={`${classNames(active ? 'bg-gray-100 w-full' : '', 'block px-4 py-2 text-sm text-gray-700')} no-underline`}
-                                        onClick={(e) => handleSignOut(e)}
+                                        onClick={() => {handleShow(); fetchSearches()}}
                                     >
                                         Search history
                                     </button>
@@ -158,6 +197,38 @@ export default function Navbar() {
             </>
         )}
       </Disclosure>
+      <Modal show={show} fullscreen={fullscreen} onHide={() => setShow(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title className='text-lg text-center'>Your Search History</Modal.Title>
+        </Modal.Header>
+        {
+            loading ? (
+                <div className='loading-screen'>
+                    <DotLoader
+                        color={"#14B8A6"}
+                        loading={loading}
+                        size={40}
+                        aria-label="Loading Spinner"
+                        data-testid="loader"
+                    />
+                    <h1 className='mt-5'>Loading ...</h1>
+                </div> 
+            ) 
+            : 
+            (
+                 <ul className="divide-y divide-gray-200 pb-0">
+                    {searches?.map((search) => (
+                        <li key={search.id} className="flex py-4">
+                        <div className="ml-1">
+                            <p className="text-sm font-medium text-gray-900 mb-0">{search.query}</p>
+                        </div>
+                        </li>
+                    ))}
+                </ul> 
+            ) 
+        }
+      </Modal>
+      
     </div>
   )
 }

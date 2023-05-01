@@ -8,3 +8,9 @@
     height: 100vh;
     color: #14b8a6;
 }
+
+@media (width <= 800px) {
+    .ul {
+        width: 100%;
+    }
+}

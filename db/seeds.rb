@@ -35,7 +35,6 @@ create_product_entries("Samsung Galaxy S21", 234.99, 50.00, "Fast Shipping", "ht
 
 
 create_product_entries("iPhone 13 pro", 139.00, 40.00, "Fast Shipping", "https://m.media-amazon.com/images/I/61sDyXAepuL._AC_SX679_.jpg", "https://www.amazon.com/iPhone-13-Pro-512GB-Gold/dp/B0BGYBBZ9R/ref=sr_1_1_sspa?crid=HSZAP9G5OS7I&keywords=iphone+13+pro&qid=1682345791&sprefix=iphone+13+pro%2Caps%2C358&sr=8-1-spons&psc=1&smid=AESX3141EPI7X&spLa=ZW5jcnlwdGVkUXVhbGlmaWVyPUEzUkJCWTlDM01UWEUmZW5jcnlwdGVkSWQ9QTAzOTg1MjUzMk1NM0k3QU5URUUyJmVuY3J5cHRlZEFkSWQ9QTAxMzE3NzMzNVJGVDVTNVpYR0YwJndpZGdldE5hbWU9c3BfYXRmJmFjdGlvbj1jbGlja1JlZGlyZWN0JmRvTm90TG9nQ2xpY2s9dHJ1ZQ==", "amazon")
-create_product_entries("iPhone 13 pro",  "Out of stock", "","","", "", "alibaba")
 create_product_entries("iPhone 13 pro", 94.99, 50.00, "Fast Shipping", "https://i.ebayimg.com/thumbs/images/g/KwsAAOSwFOliejc2/s-l300.webp", "https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw=iphone+13+pro&_sacat=0&LH_TitleDesc=0&_odkw=iphone+14+pro&_osacat=0", "ebay")
 
 

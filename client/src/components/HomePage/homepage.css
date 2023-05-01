@@ -28,7 +28,8 @@
     }
 
     .what-we-do {
-        width: 70%;
+        margin: 10%;
+        width: auto;
     }
 
     .right-rectangle {
